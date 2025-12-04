@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_upgrade/core/utilities/widgets.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:movies_upgrade/core/utilities/enums.dart';
 import '../../../core/network/api_constants.dart';
@@ -49,18 +50,7 @@ class TopRatedComponent extends StatelessWidget {
                             width: 120.0,
                             fit: BoxFit.cover,
                             imageUrl: ApiConstants.imageUrl(movie.posterPath),
-                            placeholder: (context, url) => Shimmer.fromColors(
-                              baseColor: Colors.grey[850]!,
-                              highlightColor: Colors.grey[800]!,
-                              child: Container(
-                                height: 170.0,
-                                width: 120.0,
-                                decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                              ),
-                            ),
+                            placeholder: (context, url) => shimmerx(),
                             errorWidget: (context, url, error) =>
                                 const Icon(Icons.error),
                           ),
@@ -72,10 +62,10 @@ class TopRatedComponent extends StatelessWidget {
               ),
             );
           case RequestState.isLoading:
-
-            return const Center(child: CircularProgressIndicator());
+            return shimmer2();
+           // return const Center(child: CircularProgressIndicator());
           case RequestState.isError:
-            return Center(child: Text(state.nowPlayingMessage));
+            return Center(child: Text(state.topRatedMessage));
         }
       },
     );

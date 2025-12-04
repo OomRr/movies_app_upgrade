@@ -5,6 +5,4 @@ class AppString{
   static const topRated='Top Rated';
   static const genres='Genres';
   static const moreLikeThis='More Like This';
-
-
 }

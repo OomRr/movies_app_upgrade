@@ -16,6 +16,11 @@ class RemoteMovieDataSource extends BaseRemoteMovieDataSource {
     final response = await Dio().get(
     //  'https://api.themoviedb.org/3/movie/now_playing?api_key=4426fa7f00b83dbf073bc7878e476731',
         ApiConstants.nowPlayingMoviesPath,
+    /*  queryParameters: {
+
+        'api_key': ApiConstants.apiKey,
+
+      }*/
     );
     if (response.statusCode == 200) {
       return List<MovieModel>.from((response.data['results'] as List)
@@ -62,6 +67,7 @@ class RemoteMovieDataSource extends BaseRemoteMovieDataSource {
     final response = await Dio().get(
       ApiConstants.movieDetailsPath(parameters.id),
     );
+
     if (response.statusCode == 200) {
     return MovieDetailsModel.fromJson(response.data);
     } else {

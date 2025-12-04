@@ -6,7 +6,7 @@ class TvShowModel extends TvShowEntity {
     required super.adult,
     required super.genreIds,
     required super.originalName,
-    required super.posterPath,
+    required super.backdropPath,
     required super.voteAverage,
     required super.firstAirDate,
     required super.overview,
@@ -18,7 +18,7 @@ class TvShowModel extends TvShowEntity {
     //here how to get list from json
     genreIds: List<int>.from(json['genre_ids'].map((x) => x)),
     originalName: json['original_name'],
-    posterPath: json['poster_path'],
+    backdropPath: json['backdrop_path'],
     voteAverage: json['vote_average'].toDouble(),
     firstAirDate: json['first_air_date'],
     overview: json['overview'],

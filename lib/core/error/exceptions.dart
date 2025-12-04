@@ -5,7 +5,7 @@ class ServerException implements Exception {
 
   ServerException({required this.errorMessageModel});
 }
-
+//this is if we use local data source
 class LocalDatabaseException implements Exception {
   final ErrorMessageModel errorMessageModel;
 

@@ -6,5 +6,5 @@ abstract class BaseTvShowRepo{
   Future<Either<Failure, List<TvShowEntity>>> getOnAirTvShow();
   Future<Either<Failure, List<TvShowEntity>>> getPopularTvShow();
   Future<Either<Failure, List<TvShowEntity>>> getTopRatedTvShow();
-  Future<Either<Failure, TvShowEntity>> getTvShowDetails(int id);
+ // Future<Either<Failure, TvShowEntity>> getTvShowDetails(int id);
 } 

@@ -18,6 +18,7 @@ class NowPlayingComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MovieBloc, MoviesState>(
+
       buildWhen: (previous, current) =>
           previous.nowPlayingState != current.nowPlayingState,
       builder: (context, state) {

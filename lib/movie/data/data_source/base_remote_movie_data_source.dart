@@ -14,5 +14,6 @@ abstract class BaseRemoteMovieDataSource {
   Future<MovieDetailsModel> getMovieDetails(MovieDetailsParameters parameters);
 
   Future<List<MovieRecommendationModel>> getMovieRecommendations(
-      MovieRecommendationsParameters parameters);
+    MovieRecommendationsParameters parameters,
+  );
 }
