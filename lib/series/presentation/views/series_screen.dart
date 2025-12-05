@@ -1,30 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movies_upgrade/core/services/service_locator.dart';
 import 'package:movies_upgrade/core/utilities/app_string.dart';
-import 'package:movies_upgrade/movie/presentation/controller/'
-    'bloc_event.dart';
-import '../../../core/services/service_locator.dart';
-import '../components/now_playing_component.dart';
-import '../components/popular_component.dart';
-import '../components/top_rated_component.dart';
-import '../controller/movie_bloc.dart';
+import 'package:movies_upgrade/series/presentation/components/on_air_component.dart';
+import 'package:movies_upgrade/series/presentation/components/popular_series_component.dart';
+import 'package:movies_upgrade/series/presentation/components/top_rated_series_component.dart';
+import 'package:movies_upgrade/series/presentation/controller/series_bloc.dart';
 
-class MainMoviesScreen extends StatelessWidget {
-  const MainMoviesScreen({super.key});
+class MainSeriesScreen extends StatelessWidget {
+  const MainSeriesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => sl<MovieBloc>()
-        ..add(GetNowPlayingMoviesEvent())
-        ..add(GetPopularMoviesEvent())
-        ..add(GetTopRatedMoviesEvent()),
+      create: (context) => sl<SeriesBloc>()
+        ..add(GetOnAirTvShowEvent())
+        ..add(GetPopularTvShowEvent())
+        ..add(GetTopRatedTvShowEvent()),
       child: Scaffold(
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const NowPlayingComponent(),
+            const TvOnAirComponent(),
             Container(
               margin: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 8.0),
               child: Row(
@@ -33,10 +31,11 @@ class MainMoviesScreen extends StatelessWidget {
                   Text(
                     AppString.popular,
                     style: GoogleFonts.poppins(
-                        fontSize: 19,
-                        fontWeight: FontWeight.w500,
-                        letterSpacing: 0.15,
-                        color: Colors.white),
+                      fontSize: 19,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 0.15,
+                      color: Colors.white,
+                    ),
                   ),
                   InkWell(
                     onTap: () {
@@ -50,10 +49,7 @@ class MainMoviesScreen extends StatelessWidget {
                             AppString.seeMore,
                             style: TextStyle(color: Colors.white),
                           ),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            size: 16.0,
-                          )
+                          Icon(Icons.arrow_forward_ios, size: 16.0),
                         ],
                       ),
                     ),
@@ -61,24 +57,20 @@ class MainMoviesScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const Expanded(child: PopularComponent()),
+            const Expanded(child: TvPopularComponent()),
             Container(
-              margin: const EdgeInsets.fromLTRB(
-                16.0,
-                24.0,
-                16.0,
-                8.0,
-              ),
+              margin: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     AppString.topRated,
                     style: GoogleFonts.poppins(
-                        fontSize: 19,
-                        fontWeight: FontWeight.w500,
-                        letterSpacing: 0.15,
-                        color: Colors.white),
+                      fontSize: 19,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 0.15,
+                      color: Colors.white,
+                    ),
                   ),
                   InkWell(
                     onTap: () {
@@ -92,10 +84,7 @@ class MainMoviesScreen extends StatelessWidget {
                             AppString.seeMore,
                             style: TextStyle(color: Colors.white),
                           ),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            size: 16.0,
-                          )
+                          Icon(Icons.arrow_forward_ios, size: 16.0),
                         ],
                       ),
                     ),
@@ -103,7 +92,7 @@ class MainMoviesScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const Expanded(child: TopRatedComponent()),
+            const Expanded(child: TvTopRatedComponent()),
             const SizedBox(height: 50.0),
           ],
         ),

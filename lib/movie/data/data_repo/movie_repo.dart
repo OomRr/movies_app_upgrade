@@ -47,7 +47,8 @@ class MovieRepo extends BaseMovieRepo {
 
   @override
   Future<Either<Failure, MovieDetailsEntity>> getMovieDetails(
-      MovieDetailsParameters parameters) async {
+    MovieDetailsParameters parameters,
+  ) async {
     final result = await baseRemoteMovieDataSource.getMovieDetails(parameters);
     try {
       return Right(result);
@@ -58,9 +59,10 @@ class MovieRepo extends BaseMovieRepo {
 
   @override
   Future<Either<Failure, List<MovieRecommendationEntity>>>
-      getMovieRecommendations(MovieRecommendationsParameters parameters) async {
-    final result =
-        await baseRemoteMovieDataSource.getMovieRecommendations(parameters);
+  getMovieRecommendations(MovieRecommendationsParameters parameters) async {
+    final result = await baseRemoteMovieDataSource.getMovieRecommendations(
+      parameters,
+    );
     try {
       return Right(result);
     } on ServerException catch (failure) {

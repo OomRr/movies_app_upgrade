@@ -1,5 +1,9 @@
+import 'dart:ui';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movies_upgrade/series/presentation/views/series_screen.dart';
 import 'core/services/service_locator.dart';
 import 'movie/presentation/views/movies_screen.dart';
 
@@ -14,6 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: Colors.black,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
@@ -28,8 +33,8 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
+      //home: const MainSeriesScreen(),
       home: const MainMoviesScreen(),
-     // home: const MainMoviesScreen(),
     );
   }
 }

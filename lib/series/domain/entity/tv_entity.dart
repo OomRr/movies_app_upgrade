@@ -5,7 +5,7 @@ class TvShowEntity extends Equatable {
   final bool adult;
   final List<int> genreIds;
   final String originalName;
-  final String posterPath;
+  final String backdropPath;
   final double voteAverage;
   final String firstAirDate;
   final String overview;
@@ -15,7 +15,7 @@ class TvShowEntity extends Equatable {
     required this.adult,
     required this.genreIds,
     required this.originalName,
-    required this.posterPath,
+    required this.backdropPath,
     required this.voteAverage,
     required this.firstAirDate,
     required this.overview,
@@ -27,7 +27,7 @@ class TvShowEntity extends Equatable {
     adult,
     genreIds,
     originalName,
-    posterPath,
+    backdropPath,
     voteAverage,
     firstAirDate,
     overview,

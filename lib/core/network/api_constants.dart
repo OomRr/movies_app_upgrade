@@ -7,14 +7,22 @@ class ApiConstants {
       '${baseUrl}movie/top_rated?api_key=$apiKey';
   static const String popularMoviesPath =
       '${baseUrl}movie/popular?api_key=$apiKey';
+  static const String onAirTvPath = '${baseUrl}tv/on_the_air?api_key=$apiKey';
+  static const String popularTvPath = '${baseUrl}tv/top_rated?api_key=$apiKey';
+  static const String topRatedTvPath = '${baseUrl}tv/popular?api_key=$apiKey';
+
+  static String tvDetailsPath(tvShowId) =>
+      '${baseUrl}tv/$tvShowId?api_key=$apiKey';
 
   static String movieDetailsPath(movieId) =>
       '${baseUrl}movie/$movieId?api_key=$apiKey';
+
   static String movieRecommendationsPath(movieId) =>
       '${baseUrl}movie/$movieId/recommendations?api_key=$apiKey';
 
-
   static const String baseImageUrl = 'https://image.tmdb.org/t/p/w500';
 
-  static String imageUrl(String? path) =>path!=null? baseImageUrl + path:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8bUqIUkfyesCXuAFw-MFLebEI-5to1ouplw&s';
+  static String imageUrl(String? path) => path != null
+      ? baseImageUrl + path
+      : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8bUqIUkfyesCXuAFw-MFLebEI-5to1ouplw&s';
 }

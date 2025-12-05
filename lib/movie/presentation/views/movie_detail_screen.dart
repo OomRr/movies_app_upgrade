@@ -246,7 +246,7 @@ class MovieDetailContent extends StatelessWidget {
     }
   }
 
-  Widget _showRecommendations() {
+/*  Widget _showRecommendations() {
     return BlocBuilder<MovieDetailsBloc,MovieDetailsState >(
   builder: (context, state) {
     switch(state.movieRecommendationState) {
@@ -309,5 +309,78 @@ class MovieDetailContent extends StatelessWidget {
 
   },
 );
+  }*/
+  Widget _showRecommendations() {
+    return BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
+      builder: (context, state) {
+        switch (state.movieRecommendationState) {
+          case RequestState.isLoading:
+          // Wrap the Center widget with SliverToBoxAdapter
+            return const SliverToBoxAdapter(
+              child: Center(child: CircularProgressIndicator()),
+            );
+          case RequestState.isLoaded:
+            return SliverGrid(
+              delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                  final recommendation = state
+                      .movieRecommendationEntitys[index];
+                  return FadeInUp(
+                    from: 20,
+                    duration: const Duration(milliseconds: 500),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (BuildContext context) {
+                              return MovieDetailScreen(id: recommendation.id);
+                            }));
+                      },
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.all(
+                            Radius.circular(4.0)),
+                        child: CachedNetworkImage(
+                          imageUrl: ApiConstants.imageUrl(recommendation
+                              .backDropPath!),
+                          placeholder: (context, url) =>
+                              Shimmer.fromColors(
+                                baseColor: Colors.grey[850]!,
+                                highlightColor: Colors.grey[800]!,
+                                child: Container(
+                                  height: 170.0,
+                                  width: 120.0,
+                                  decoration: BoxDecoration(
+                                    color: Colors.black,
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                ),
+                              ),
+                          errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                          height: 180.0,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                // Use the actual length of the recommendation list
+                childCount: state.movieRecommendationEntitys.length,
+              ),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                mainAxisSpacing: 8.0,
+                crossAxisSpacing: 8.0,
+                childAspectRatio: 0.7,
+                crossAxisCount: 3,
+              ),
+            );
+          case RequestState.isError:
+          // Wrap the Text widget with SliverToBoxAdapter
+            return SliverToBoxAdapter(
+              child: Center(
+                  child: Text(state.movieRecommendationErrorMessage!)),
+            );
+        }
+      },
+    );
   }
 }

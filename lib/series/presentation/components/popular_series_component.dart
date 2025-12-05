@@ -3,23 +3,22 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_upgrade/core/utilities/enums.dart';
+import 'package:movies_upgrade/series/presentation/controller/series_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../core/network/api_constants.dart';
 import '../../../core/utilities/widgets.dart';
-import '../controller/bloc_state.dart';
-import '../controller/movie_bloc.dart';
-import '../views/movie_detail_screen.dart';
 
-class PopularComponent extends StatelessWidget {
-  const PopularComponent({super.key});
+class TvPopularComponent extends StatelessWidget {
+  const TvPopularComponent({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MovieBloc, MoviesState>(
+    return BlocBuilder<SeriesBloc, SeriesState>(
       buildWhen: (previous, current) =>
-          previous.popularState != current.popularState,
+          previous.popularRequestState != current.popularRequestState,
       builder: (context, state) {
-        switch (state.popularState) {
+        switch (state.popularRequestState!) {
           case RequestState.isLoaded:
             return FadeIn(
               duration: const Duration(milliseconds: 500),
@@ -29,20 +28,20 @@ class PopularComponent extends StatelessWidget {
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  itemCount: state.popularMovies.length,
+                  itemCount: state.popularTvShows!.length,
                   itemBuilder: (context, index) {
-                    final movie = state.popularMovies[index];
+                    final tvShow = state.popularTvShows![index];
                     return Container(
                       padding: const EdgeInsets.only(right: 8.0),
                       child: InkWell(
                         onTap: () {
-                          Navigator.of(context).push(
+                          /*Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (BuildContext context) {
                                 return MovieDetailScreen(id: movie.id);
                               },
                             ),
-                          );
+                          );*/
                         },
                         child: ClipRRect(
                           borderRadius: const BorderRadius.all(
@@ -51,8 +50,19 @@ class PopularComponent extends StatelessWidget {
                           child: CachedNetworkImage(
                             width: 120.0,
                             fit: BoxFit.cover,
-                            imageUrl: ApiConstants.imageUrl(movie.posterPath),
-                            placeholder: (context, url) => shimmerx(),
+                            imageUrl: ApiConstants.imageUrl(tvShow.backdropPath),
+                            placeholder: (context, url) => Shimmer.fromColors(
+                              baseColor: Colors.grey[850]!,
+                              highlightColor: Colors.grey[800]!,
+                              child: Container(
+                                height: 170.0,
+                                width: 120.0,
+                                decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                              ),
+                            ),
                             errorWidget: (context, url, error) =>
                                 const Icon(Icons.error),
                           ),
@@ -63,16 +73,13 @@ class PopularComponent extends StatelessWidget {
                 ),
               ),
             );
-
           case RequestState.isLoading:
             return shimmer2();
-          //  const Center(child: CircularProgressIndicator());
+           // return const Center(child: CircularProgressIndicator());
           case RequestState.isError:
-            return Center(child: Text(state.popularMessage));
+            return Center(child: Text(state.popularErrorMessage!));
         }
       },
     );
   }
-
-
 }
