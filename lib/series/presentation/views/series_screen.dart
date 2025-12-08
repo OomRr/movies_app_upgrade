@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movies_upgrade/core/services/payment_methods.dart';
 import 'package:movies_upgrade/core/services/service_locator.dart';
 import 'package:movies_upgrade/core/utilities/app_string.dart';
 import 'package:movies_upgrade/series/presentation/components/on_air_component.dart';
@@ -19,6 +20,17 @@ class MainSeriesScreen extends StatelessWidget {
         ..add(GetPopularTvShowEvent())
         ..add(GetTopRatedTvShowEvent()),
       child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            IconButton(
+              onPressed: () {
+                initPaymentSheet(context: context, amount: 100);
+              },
+              icon: Icon(Icons.shopping_cart_checkout_outlined),
+            ),
+          ],
+
+        ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
