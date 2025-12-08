@@ -1,0 +1,9 @@
+{
+    "BracketHighlighter.enableExtension": true,
+    // Enables the Dart/Flutter MCP Server for AI tools
+    "dart.mcpServer": true,
+    // Forces the gutter icons for tests to appear (often tied to CodeLens)
+    "dart.showTestCodeLens": true,
+    // Ensures the standard gutter icons for Flutter are enabled
+    "dart.flutterGutterIcons": true
+}
