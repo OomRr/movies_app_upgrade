@@ -21,6 +21,11 @@ class SeriesBloc extends Bloc<SeriesEvent, SeriesState> {
     required this.tvTopRatedUseCase,
   }) : super(SeriesState()) {
     on<GetOnAirTvShowEvent>((event, emit) async {
+      if (state.onAirTvShows != null &&
+          state.topRatedTvShows != null &&
+          state.popularTvShows != null) {
+        return;
+      }
       final result = await tvOnAirUseCase(NoParameter());
       result.fold(
         (l) => emit(
