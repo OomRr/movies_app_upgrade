@@ -14,100 +14,84 @@ class MainSeriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<SeriesBloc>()
-        ..add(GetOnAirTvShowEvent())
-        ..add(GetPopularTvShowEvent())
-        ..add(GetTopRatedTvShowEvent()),
-      child: Scaffold(
-        appBar: AppBar(
-          actions: [
-            IconButton(
-              onPressed: () {
-                initPaymentSheet(context: context, amount: 100);
-              },
-              icon: Icon(Icons.shopping_cart_checkout_outlined),
-            ),
-          ],
+    return Scaffold(
 
-        ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const TvOnAirComponent(),
-            Container(
-              margin: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    AppString.popular,
-                    style: GoogleFonts.poppins(
-                      fontSize: 19,
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 0.15,
-                      color: Colors.white,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const TvOnAirComponent(),
+          Container(
+            margin: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  AppString.popular,
+                  style: GoogleFonts.poppins(
+                    fontSize: 19,
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 0.15,
+                    color: Colors.white,
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    /// TODO : NAVIGATION TO POPULAR SCREEN
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          AppString.seeMore,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        Icon(Icons.arrow_forward_ios, size: 16.0),
+                      ],
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      /// TODO : NAVIGATION TO POPULAR SCREEN
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Text(
-                            AppString.seeMore,
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Icon(Icons.arrow_forward_ios, size: 16.0),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-            const Expanded(child: TvPopularComponent()),
-            Container(
-              margin: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    AppString.topRated,
-                    style: GoogleFonts.poppins(
-                      fontSize: 19,
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 0.15,
-                      color: Colors.white,
+          ),
+          const Expanded(child: TvPopularComponent()),
+          Container(
+            margin: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  AppString.topRated,
+                  style: GoogleFonts.poppins(
+                    fontSize: 19,
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 0.15,
+                    color: Colors.white,
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    /// TODO : NAVIGATION TO Top Rated Movies Screen
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          AppString.seeMore,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        Icon(Icons.arrow_forward_ios, size: 16.0),
+                      ],
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      /// TODO : NAVIGATION TO Top Rated Movies Screen
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Text(
-                            AppString.seeMore,
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Icon(Icons.arrow_forward_ios, size: 16.0),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-            const Expanded(child: TvTopRatedComponent()),
-            const SizedBox(height: 50.0),
-          ],
-        ),
+          ),
+          const Expanded(child: TvTopRatedComponent()),
+          const SizedBox(height: 50.0),
+        ],
       ),
     );
   }
