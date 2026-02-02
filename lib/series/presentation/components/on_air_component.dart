@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_upgrade/core/utilities/enums.dart';
 import 'package:movies_upgrade/series/presentation/controller/series_bloc.dart';
+import 'package:movies_upgrade/series/presentation/views/series_detail_screen.dart';
 
 import '../../../core/network/api_constants.dart';
 import '../../../core/services/payment_methods.dart';
@@ -34,13 +35,13 @@ class TvOnAirComponent extends StatelessWidget {
                   return GestureDetector(
                     key: const Key('openSeriesMinimalDetail'),
                     onTap: () {
-                      /*  Navigator.of(context).push(
+                       Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (BuildContext context) {
-                        return MovieDetailScreen(id: item.id);
+                        return SeriesDetailScreen(id: item.id);
                       },
                     ),
-                  );*/
+                  );
                     },
                     child: Stack(
                       children: [
