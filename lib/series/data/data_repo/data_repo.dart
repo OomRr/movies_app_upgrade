@@ -3,6 +3,8 @@ import 'package:movies_upgrade/core/error/exceptions.dart';
 import 'package:movies_upgrade/core/error/failure.dart';
 import 'package:movies_upgrade/series/data/data_source/base_remote_tv_show_data_source.dart';
 import 'package:movies_upgrade/series/domain/domain_repo/base_tv_repo.dart';
+import 'package:movies_upgrade/series/domain/entity/series_details_entity.dart';
+import 'package:movies_upgrade/series/domain/entity/series_recommendation_entity.dart';
 import 'package:movies_upgrade/series/domain/entity/tv_entity.dart';
 
 class TvShowRepository implements BaseTvShowRepo {
@@ -40,13 +42,26 @@ class TvShowRepository implements BaseTvShowRepo {
     }
   }
 
-  /*  @override
-  Future<Either<Failure, TvShowEntity>> getTvShowDetails(int id) async{
-    final result=await baseRemoteTvShowDataSource.getDetailsTvShow();
-    try{
+  @override
+  Future<Either<Failure, SeriesDetailsEntity>> getTvShowDetails(int id) async {
+    try {
+      final result = await baseRemoteTvShowDataSource.getTvShowDetails(id);
       return Right(result);
-    }on ServerException catch(failure){
+    } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorMessageModel.statusMessage));
     }
-  }*/
+  }
+
+  @override
+  Future<Either<Failure, List<SeriesRecommendationEntity>>>
+  getTvShowRecommendations(int id) async {
+    try {
+      final result = await baseRemoteTvShowDataSource.getTvShowRecommendations(
+        id,
+      );
+      return Right(result);
+    } on ServerException catch (failure) {
+      return Left(ServerFailure(failure.errorMessageModel.statusMessage));
+    }
+  }
 }

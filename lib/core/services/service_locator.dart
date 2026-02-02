@@ -14,10 +14,13 @@ import 'package:movies_upgrade/series/data/data_repo/data_repo.dart';
 import 'package:movies_upgrade/series/data/data_source/base_remote_tv_show_data_source.dart';
 import 'package:movies_upgrade/series/data/data_source/remote_tv_show_data_source.dart';
 import 'package:movies_upgrade/series/domain/domain_repo/base_tv_repo.dart';
+import 'package:movies_upgrade/series/domain/use_case/get_tv_show_details_usecase.dart';
+import 'package:movies_upgrade/series/domain/use_case/get_tv_show_recommendations_usecase.dart';
 import 'package:movies_upgrade/series/domain/use_case/tv_on_air_usecase.dart';
 import 'package:movies_upgrade/series/domain/use_case/tv_popular_usecase.dart';
 import 'package:movies_upgrade/series/domain/use_case/tv_top_rated_usecase.dart';
 import 'package:movies_upgrade/series/presentation/controller/series_bloc.dart';
+import 'package:movies_upgrade/series/presentation/controller/series_details_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -60,10 +63,19 @@ class ServiceLocator {
         tvTopRatedUseCase: sl(),
       ),
     );
+    sl.registerFactory(
+      () => SeriesDetailsBloc(
+        getTvShowDetailsUseCase: sl(),
+        getTvShowRecommendationsUseCase: sl(),
+      ),
+    );
     //use cases objects
     sl.registerLazySingleton(() => TvOnAirUseCase(sl()));
     sl.registerLazySingleton(() => TvPopularUseCase(sl()));
     sl.registerLazySingleton(() => TvTopRatedUseCase(sl()));
+    sl.registerLazySingleton(() => GetTvShowDetailsUseCase(sl()));
+    sl.registerLazySingleton(() => GetTvShowRecommendationsUseCase(sl()));
+
     //repository object
     sl.registerLazySingleton<BaseTvShowRepo>(
       () => TvShowRepository(baseRemoteTvShowDataSource: sl()),

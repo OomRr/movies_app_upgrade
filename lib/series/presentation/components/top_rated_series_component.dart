@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_upgrade/core/utilities/enums.dart';
 import 'package:movies_upgrade/series/presentation/controller/series_bloc.dart';
+import 'package:movies_upgrade/series/presentation/views/series_detail_screen.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../core/network/api_constants.dart';
@@ -30,15 +31,15 @@ class TvTopRatedComponent extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   itemCount: state.topRatedTvShows!.length,
                   itemBuilder: (context, index) {
-                    final movie = state.topRatedTvShows![index];
+                    final series = state.topRatedTvShows![index];
                     return Container(
                       padding: const EdgeInsets.only(right: 8.0),
                       child: InkWell(
                         onTap: () {
-                          /*  Navigator.of(context).push(
+                            Navigator.of(context).push(
                               MaterialPageRoute(builder: (BuildContext context) {
-                                return MovieDetailScreen(id: movie.id);
-                              }));*/
+                                return SeriesDetailScreen(id: series.id);
+                              }));
                         },
                         child: ClipRRect(
                           borderRadius: const BorderRadius.all(
@@ -47,7 +48,7 @@ class TvTopRatedComponent extends StatelessWidget {
                           child: CachedNetworkImage(
                             width: 120.0,
                             fit: BoxFit.cover,
-                            imageUrl: ApiConstants.imageUrl(movie.backdropPath),
+                            imageUrl: ApiConstants.imageUrl(series.backdropPath),
                             placeholder: (context, url) => Shimmer.fromColors(
                               baseColor: Colors.grey[850]!,
                               highlightColor: Colors.grey[800]!,

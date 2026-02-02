@@ -7,7 +7,6 @@ import 'package:movies_upgrade/core/utilities/app_string.dart';
 import 'package:movies_upgrade/series/presentation/components/on_air_component.dart';
 import 'package:movies_upgrade/series/presentation/components/popular_series_component.dart';
 import 'package:movies_upgrade/series/presentation/components/top_rated_series_component.dart';
-import 'package:movies_upgrade/series/presentation/controller/series_bloc.dart';
 
 class MainSeriesScreen extends StatelessWidget {
   const MainSeriesScreen({super.key});
@@ -36,7 +35,13 @@ class MainSeriesScreen extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    /// TODO : NAVIGATION TO POPULAR SCREEN
+                /*        Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) {
+                        return SeriesDetailScreen(id: item.id);
+                      },
+                    ),
+                  ); */
                   },
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
